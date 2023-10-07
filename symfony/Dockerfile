@@ -11,11 +11,15 @@ RUN apt-get update && apt-get install -y \
     unzip
 RUN docker-php-ext-install zip
 
+# Install XDebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+env XDEBUG_MODE=coverage
+
 # Install composer
 RUN curl -sS https://getcomposer.org/installer -o composer-setup.php
 RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 RUN php -r "unlink('composer-setup.php');"
-
 
 # Install symfony
 RUN curl -sS https://get.symfony.com/cli/installer | bash

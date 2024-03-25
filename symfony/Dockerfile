@@ -1,4 +1,4 @@
-From php:8.2-cli
+From php:8.3-cli
 
 # Install git
 RUN apt-get -y update
